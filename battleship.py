@@ -111,7 +111,7 @@ while jugar:
                 if cant>0 and cant<2:
                     listaAuxiliarColisionados.add(pygame.sprite.spritecollide(raton,listaGrilla,True))
                     turno=2
-                    print (listaAuxiliarColisionados)
+                    #print (listaAuxiliarColisionados)
             
         elif turno==2:        
         #colision jugador2
@@ -122,7 +122,7 @@ while jugar:
                 if cant>0 and cant<2:
                     listaAuxiliarColisionadosJug2.add(pygame.sprite.spritecollide(raton,listaGrilla2,True))
                     turno=1
-                    print (listaAuxiliarColisionados)
+                    #print (listaAuxiliarColisionados)
             
     
     cant=0
@@ -132,20 +132,29 @@ while jugar:
     #grilla
     listaGrilla.draw(screen)
     listaGrilla2.draw(screen)
-    
+    ganojug1[0]=0
+    ganojug1[1]=0
+    ganojug1[2]=0
+    ganojug1[3]=0
+    ganojug1[4]=0
     for coli in listaAuxiliarColisionados:
         if coli.tipo==1:
             coli.image.fill((0,0,0))
-            print(coli.rect.x,coli.rect.y)
+            #print(coli.rect.x,coli.rect.y)
+            ganojug1[0]+=1
             #listaAuxiliarColisionados.remove(coli)
         elif coli.tipo==2:
             coli.image.fill((70,208,73))
+            ganojug1[1]+=1
         elif coli.tipo==3:
             coli.image.fill((183,183,183))
+            ganojug1[2]+=1
         elif coli.tipo==4:
             coli.image.fill((255,255,0))
+            ganojug1[3]+=1
         elif coli.tipo==0:
             coli.image.fill((0,0,255))
+            ganojug1[4]+=1
     listaAuxiliarColisionados.draw(screen)
     
     ganojug2[0]=0
@@ -156,7 +165,7 @@ while jugar:
     for coli in listaAuxiliarColisionadosJug2:
         if coli.tipo==1:
             coli.image.fill((0,0,0))
-            print(coli.rect.x,coli.rect.y)
+            #print(coli.rect.x,coli.rect.y)
             ganojug2[0]+=1
             #listaAuxiliarColisionados.remove(coli)
         elif coli.tipo==2:
@@ -175,10 +184,13 @@ while jugar:
     
     #ganador
     
-    if gano[0]==4 and gano[1]==6 and gano[2]==6 and gano[3]==4:
-        print("ganador jugador 2")
+    if ganojug1[0]==4 and ganojug1[1]==6 and ganojug1[2]==6 and ganojug1[3]==4:
+        print("ganador jugador 1")
+        imagenganador=pygame.image.load("")
         jugar=False
-        
+    elif ganojug2[0]==4 and ganojug2[1]==6 and ganojug2[2]==6 and ganojug2[3]==4:
+        print("ganador jugador 2")
+        jugar=False    
     
     #mouse
     mouse_pos=pygame.mouse.get_pos()
