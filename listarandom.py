@@ -1,4 +1,5 @@
 import random
+
 """
 i=0
 j=0
@@ -110,3 +111,98 @@ else:
             
             
 #print(matriz)
+
+
+#jugador 2
+    #submarinos2
+i=0
+while i<4:
+    f=random.randint(0,9)
+    c=random.randint(0,8)
+    if  mj2[f][c]!=0:
+        print("repetido")
+
+    else:
+        mj2[f][c]=1
+        i+=1
+           
+#destructores2
+
+hv=random.randint(0,1)
+i=0
+while i<3:
+    if hv==0:#horizontal
+        f=random.randint(0,9)
+        c=random.randint(0,7)
+        if  mj2[f][c]!=0 or mj2[f][c+1]!=0 :
+            print("repetido destructor")
+        else:
+            mj2[f][c]=2
+            mj2[f][c+1]=2
+            i+=1
+    else:#vertical
+        f=random.randint(0,8)
+        c=random.randint(0,8)
+        if  mj2[f+1][c]!=0 or mj2[f][c]!=0 :
+            print("repetido destructor")
+        else:
+            mj2[f][c]=2
+            mj2[f+1][c]=2
+            i+=1
+    hv=random.randint(0,1)
+
+#cruceros2
+    
+hv=random.randint(0,1)
+i=0
+while i<2:
+    if hv==0:#horizontal
+        f=random.randint(0,9)
+        c=random.randint(0,6)
+        if  mj2[f][c]!=0 or mj2[f][c+1]!=0 or mj2[f][c+2]!=0:
+            print("repetido cruceros")
+        else:
+            mj2[f][c]=3
+            mj2[f][c+1]=3
+            mj2[f][c+2]=3
+            i+=1
+    else:
+        f=random.randint(0,7)
+        c=random.randint(0,8)
+        if  mj2[f][c]!=0 or mj2[f+1][c]!=0 or mj2[f+2][c]!=0 :
+            print("repetido cruceros")
+        else:
+            mj2[f][c]=3
+            mj2[f+1][c]=3
+            mj2[f+2][c]=3
+            i+=1
+    hv=random.randint(0,1)
+        
+#acorazado2
+hv=random.randint(0,1)
+i=0
+if hv==0:#horizontal
+    while i==0:
+        f=random.randint(0,9)
+        c=random.randint(0,5)
+        if  mj2[f][c]!=0 or mj2[f][c+1]!=0 or mj2[f][c+2]!=0 or mj2[f][c+3]!=0:
+            print("repetido destructor")
+        else:
+            mj2[f][c]=4
+            mj2[f][c+1]=4
+            mj2[f][c+2]=4
+            mj2[f][c+3]=4
+            i=1
+else:
+    while i==0:
+        
+        f=random.randint(0,6)
+        c=random.randint(0,8)
+        if  mj2[f][c]!=0 or mj2[f+1][c]!=0 or mj2[f+2][c]!=0 or mj2[f+3][c]!=0 :
+            print("repetido destructor")
+        else:
+            mj2[f][c]=4
+            mj2[f+1][c]=4
+            mj2[f+2][c]=4
+            mj2[f+3][c]=4
+            i+=1
