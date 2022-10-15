@@ -22,11 +22,41 @@ class grid(pygame.sprite.Sprite):
 class puntero(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image=pygame.image.load("puntero.png") 
+        self.image=pygame.image.load("imagenes/puntero.png") 
         self.rect=self.image.get_rect()
         
-                 
-    
+def cargar():
+        
+    print(matriz)
+    i1=0
+    j1=0
+
+    for x in range(40,370,33):
+        j1=0
+        for y in range(50,380,33):
+            grilla=grid()
+            grilla.rect.x=x
+            grilla.rect.y=y
+            grilla.tipo=matriz[i1][j1]
+            listaGrilla.add(grilla)
+            j1+=1
+        i1+=1
+    print(i1,j1)
+
+    i1=0
+    j1=0
+    for x in range(430,730,33):
+        j1=0
+        for y in range(50,380,33):
+            grilla=grid()
+            grilla.rect.x=x
+            grilla.rect.y=y
+            grilla.tipo=mj2[i1][j1]
+            listaGrilla2.add(grilla)
+            j1+=1
+        i1+=1            
+
+ 
 """
 def grilla():
     pass
@@ -52,40 +82,24 @@ listaRaton.add(raton)
 turno=1
 ganojug1=[0,0,0,0,0]
 ganojug2=[0,0,0,0,0]
+
+acorazado=pygame.image.load("imagenes/acorazado.png")
+crucero=pygame.image.load("imagenes/crucero.png")
+submarino=pygame.image.load("imagenes/submarn.png")
+destructor=pygame.image.load("imagenes/destructor.png")
+mano=pygame.image.load("imagenes/mano.png")
+
+fuente=pygame.font.Font("fuente/Blood Squad.ttf",40)
+texto=fuente.render("Player 1",0,(200,60,80))
+
 #inicio
 
 screen=pygame.display.set_mode((800,600))
-backgroung=pygame.image.load("battleship-wallpapers.jpg").convert()
+backgroung=pygame.image.load("imagenes/battleship-wallpapers.jpg").convert()
 
-print(matriz)
-i1=0
-j1=0
+cargar()
 
-for x in range(40,370,33):
-    j1=0
-    for y in range(40,370,33):
-        grilla=grid()
-        grilla.rect.x=x
-        grilla.rect.y=y
-        grilla.tipo=matriz[i1][j1]
-        listaGrilla.add(grilla)
-        j1+=1
-    i1+=1
-print(i1,j1)
-
-i1=0
-j1=0
-for x in range(420,720,33):
-    j1=0
-    for y in range(40,370,33):
-        grilla=grid()
-        grilla.rect.x=x
-        grilla.rect.y=y
-        grilla.tipo=mj2[i1][j1]
-        listaGrilla2.add(grilla)
-        j1+=1
-    i1+=1
-print(i1,j1)    
+#print(i1,j1)    
 listaAuxiliarColisionados=pygame.sprite.Group()    
 listaAuxiliarColisionadosJug2=pygame.sprite.Group()       
 colision=pygame.sprite.Group()
@@ -182,6 +196,19 @@ while jugar:
             ganojug2[4]+=1   
     listaAuxiliarColisionadosJug2.draw(screen)
     
+    
+    screen.blit(acorazado,[5,460])
+    screen.blit(crucero,[270,500])
+    screen.blit(submarino,[515,520])
+    screen.blit(destructor,[650,540])
+    screen.blit(texto,[120,0])
+    
+    #mano ganador
+    
+    if turno==1:
+        screen.blit(mano,[140,400])
+    elif turno==2:
+        screen.blit(mano,[510,400])
     #ganador
     
     if ganojug1[0]==4 and ganojug1[1]==6 and ganojug1[2]==6 and ganojug1[3]==4:
