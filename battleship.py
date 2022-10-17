@@ -90,8 +90,8 @@ destructor=pygame.image.load("imagenes/destructor.png")
 mano=pygame.image.load("imagenes/mano.png")
 
 fuente=pygame.font.Font("fuente/Blood Squad.ttf",40)
-texto=fuente.render("Player 1",0,(200,60,80))
-
+textop1=fuente.render("Player 1",0,(249,0,0))
+textop2=fuente.render("Player 2",0,(249,0,0))
 #inicio
 
 screen=pygame.display.set_mode((800,600))
@@ -201,7 +201,8 @@ while jugar:
     screen.blit(crucero,[270,500])
     screen.blit(submarino,[515,520])
     screen.blit(destructor,[650,540])
-    screen.blit(texto,[120,0])
+    screen.blit(textop1,[145,0])
+    screen.blit(textop2,[540,0])
     
     #mano ganador
     
@@ -229,4 +230,4 @@ while jugar:
     
     pygame.display.flip()
     
-    #reloj.tick(60)
+    reloj.tick(60)
