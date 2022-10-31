@@ -153,18 +153,19 @@ while jugar:
     ganojug1[4]=0
     for coli in listaAuxiliarColisionados:
         if coli.tipo==1:
-            coli.image.fill((0,0,0))
+            coli.image.fill((0,255,64))
             #print(coli.rect.x,coli.rect.y)
             ganojug1[0]+=1
+            
             #listaAuxiliarColisionados.remove(coli)
         elif coli.tipo==2:
-            coli.image.fill((70,208,73))
+            coli.image.fill((255,255,0))
             ganojug1[1]+=1
         elif coli.tipo==3:
-            coli.image.fill((183,183,183))
+            coli.image.fill((255,0,0))
             ganojug1[2]+=1
         elif coli.tipo==4:
-            coli.image.fill((255,255,0))
+            coli.image.fill((192,192,192))
             ganojug1[3]+=1
         elif coli.tipo==0:
             coli.image.fill((0,0,255))
@@ -178,18 +179,18 @@ while jugar:
     ganojug2[4]=0
     for coli in listaAuxiliarColisionadosJug2:
         if coli.tipo==1:
-            coli.image.fill((0,0,0))
+            coli.image.fill((0,255,64))
             #print(coli.rect.x,coli.rect.y)
             ganojug2[0]+=1
             #listaAuxiliarColisionados.remove(coli)
         elif coli.tipo==2:
-            coli.image.fill((70,208,73))
+            coli.image.fill((255,255,0))
             ganojug2[1]+=1
         elif coli.tipo==3:
-            coli.image.fill((183,183,183))
+            coli.image.fill((255,0,0))
             ganojug2[2]+=1
         elif coli.tipo==4:
-            coli.image.fill((255,255,0))
+            coli.image.fill((192,192,192))
             ganojug2[3]+=1
         elif coli.tipo==0:
             coli.image.fill((0,0,255))
