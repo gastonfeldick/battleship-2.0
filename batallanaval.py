@@ -1,6 +1,7 @@
 import sys
 from os import system
 from pickle import FALSE
+from asyncio import events
 
 import pygame
 
@@ -16,6 +17,8 @@ class grid(pygame.sprite.Sprite):
         self.tipo=0
         self.image.fill(white)
         self.rect=self.image.get_rect()
+    def update(self):
+            self.kill()
 
 class puntero(pygame.sprite.Sprite):
     def __init__(self):
@@ -24,7 +27,7 @@ class puntero(pygame.sprite.Sprite):
         self.rect=self.image.get_rect()
         
 def cargar():
-        
+    print("cargando matriz\n")    
     print(matriz)
     i1=0
     j1=0
@@ -71,6 +74,9 @@ class botones(pygame.sprite.Sprite):
         self.rect=self.image.get_rect()
     def update(self):
             self.kill()
+    def mover(self):
+        self.rect.x=640
+        self.rect.y=500
 
 def cargarBanderas():
     
@@ -110,16 +116,20 @@ def cargarBotones():
         btn=botones()
         if i==0:
             btn.image=pygame.image.load("banderas/play.png")
-            btn.rect.x=300
-            btn.rect.y=300
-            listaBotones.add(btn)
+            btn.rect.x=310
+            btn.rect.y=500
+            listaBotonesPlay.add(btn)
         elif i==1:
             btn.image=pygame.image.load("banderas/reset.png")
-            btn.rect.x=420
-            btn.rect.y=327
-            listaBotones.add(btn)
+            btn.rect.x=430
+            btn.rect.y=527
+            listaBotonesReset.add(btn)
         i+=1
-        
+
+imgreinicio=pygame.image.load("banderas/reset1.png")
+botonReinicio = imgreinicio.get_rect()
+
+
 white=(255,255,255)
 listaGrilla=pygame.sprite.Group()
 listaGrilla2=pygame.sprite.Group()
@@ -143,7 +153,8 @@ mano=pygame.image.load("imagenes/mano.png")
   
 listaBandera=pygame.sprite.Group()  
 listaBanderaSeleccionada=pygame.sprite.Group()
-listaBotones=pygame.sprite.Group()  
+listaBotonesPlay=pygame.sprite.Group()
+listaBotonesReset=pygame.sprite.Group() 
 
 seleccionjugador=1
 
@@ -176,7 +187,7 @@ sonido1=pygame.mixer.Sound("bomba.wav")
 while True:
     
     if menu==0:
-    
+        
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 sys.exit()
@@ -206,9 +217,24 @@ while True:
                     banderita.update()
                 cargarBotones()
             if event.type==pygame.MOUSEBUTTONDOWN:
-                colisionMenu=pygame.sprite.spritecollide(raton,listaBotones,False)
-                if colisionMenu:
+                colisionPlay=pygame.sprite.spritecollide(raton,listaBotonesPlay,False)
+                colisionReset=pygame.sprite.spritecollide(raton,listaBotonesReset,False)
+                if colisionPlay:
                     menu=1
+                    for i in listaBotonesReset:
+                        i.mover()
+                    
+                    
+                if colisionReset:
+                    menu=0
+                    print(menu)
+                    listaBotonesPlay.update()
+                    listaBotonesReset.update()
+                    listaBanderaSeleccionada.update()
+                    listaBandera.update()
+                    seleccionjugador=1
+                    cargarBanderas()
+                    
                 
         screen.fill((0,0,0))
         
@@ -216,14 +242,14 @@ while True:
         screen.blit(textop2,[540,550])
         
         listaBandera.draw(screen)
-        listaBotones.draw(screen)
+        listaBotonesPlay.draw(screen)
+        listaBotonesReset.draw(screen)
         listaBanderaSeleccionada.draw(screen)
         
         mouse_pos=pygame.mouse.get_pos()
         raton.rect.x=mouse_pos[0]
         raton.rect.y=mouse_pos[1]
         listaRaton.draw(screen)
-        
         
         pygame.display.flip()
 
@@ -272,7 +298,26 @@ while True:
                         
                         turno=1
                         #print (listaAuxiliarColisionados)
-                
+            
+            if event.type==pygame.MOUSEBUTTONDOWN:
+                colisionReset=pygame.sprite.spritecollide(raton,listaBotonesReset,True)
+                if colisionReset:
+                    listaBotonesPlay.update()
+                    listaBotonesReset.update()
+                    listaAuxiliarColisionados.update()
+                    listaAuxiliarColisionadosJug2.update()
+                    listaGrilla.update()
+                    listaGrilla2.update()
+                    listaBanderaSeleccionada.update()
+                    listaBandera.update()
+                    seleccionjugador=1
+                    rinicio2()
+                    menu=0
+                    turno=1
+                    cargar()
+                    cargarBanderas()
+                    
+                    
         
         cant=0
         #fondo        
@@ -367,6 +412,13 @@ while True:
             menu=2
             jugar=False    
         
+        
+        #reset
+        listaBotonesReset.draw(screen)
+        
+        
+        
+        
         #mouse
         mouse_pos=pygame.mouse.get_pos()
         raton.rect.x=mouse_pos[0]
@@ -377,9 +429,28 @@ while True:
         
     elif menu==2:
         for event in pygame.event.get():
-                if event.type==pygame.QUIT:
+            if event.type==pygame.QUIT:
                     sys.exit()
-                    
+            if event.type==pygame.KEYDOWN:
+                if event.key==pygame.K_RETURN:
+                    print("enter")
+                    listaBotonesPlay.update()
+                    listaBotonesReset.update()
+                    listaAuxiliarColisionados.update()
+                    listaAuxiliarColisionadosJug2.update()
+                    listaGrilla.update()
+                    listaGrilla2.update()
+                    listaBanderaSeleccionada.update()
+                    listaBandera.update()
+                    listaGanadora.update()
+                    seleccionjugador=1
+                    rinicio2()
+                    menu=0
+                    turno=1
+                    cargar()
+                    cargarBanderas()
+
+                
         screen.fill((0,0,0))
         este=0
         for gan in listaBanderaSeleccionada:   
