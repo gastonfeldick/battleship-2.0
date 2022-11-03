@@ -242,17 +242,32 @@ while True:
                     cant+=1
                 if event.type==pygame.MOUSEBUTTONDOWN:
                     if cant>0 and cant<2:
+                        agrega=pygame.sprite.spritecollide(raton,listaGrilla,False)
+                        if agrega:
+                            for en in agrega:
+                                if en.tipo==1 or en.tipo==2 or en.tipo==3 or en.tipo==4:
+                                    sonido1.play()
+                                    sonido1.set_volume(1.0)
+
                         listaAuxiliarColisionados.add(pygame.sprite.spritecollide(raton,listaGrilla,True))
                         turno=2
                         #print (listaAuxiliarColisionados)
                 
             elif turno==2:        
-            #colision jugador2
+            #colision jugador2s
                 colisionjug2=pygame.sprite.spritecollide(raton,listaGrilla2,False)
                 for aux in colisionjug2:
                     cant+=1
                 if event.type==pygame.MOUSEBUTTONDOWN:
                     if cant>0 and cant<2:
+                        agrega2=pygame.sprite.spritecollide(raton,listaGrilla2,False)
+                        if agrega2:
+                            for en in agrega2:
+                                if en.tipo==1 or en.tipo==2 or en.tipo==3 or en.tipo==4:
+                                    sonido1.play()
+                                    sonido1.set_volume(1.0)
+
+
                         listaAuxiliarColisionadosJug2.add(pygame.sprite.spritecollide(raton,listaGrilla2,True))
                         
                         turno=1
