@@ -27,8 +27,8 @@ class puntero(pygame.sprite.Sprite):
         self.rect=self.image.get_rect()
         
 def cargar():
-    print("cargando matriz\n")    
-    print(matriz)
+    #print("cargando matriz\n")    
+    #print(matriz)
     i1=0
     j1=0
 
@@ -42,7 +42,7 @@ def cargar():
             listaGrilla.add(grilla)
             j1+=1
         i1+=1
-    print(i1,j1)
+    #print(i1,j1)
 
     i1=0
     j1=0
@@ -256,6 +256,8 @@ while True:
     elif menu==1:
         colision=()
         colisionjug2=()
+        for i in listaBotonesReset:
+            i.mover()
         pygame.sprite.Group.remove(listaAuxiliarColisionados)
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
@@ -402,12 +404,12 @@ while True:
         #ganador
         
         if ganojug1[0]==4 and ganojug1[1]==6 and ganojug1[2]==6 and ganojug1[3]==4:
-            print("ganador jugador 1")
+            #print("ganador jugador 1")
             gano=1
             menu=2
             jugar=False
         elif ganojug2[0]==4 and ganojug2[1]==6 and ganojug2[2]==6 and ganojug2[3]==4:
-            print("ganador jugador 2")
+            #print("ganador jugador 2")
             gano=2
             menu=2
             jugar=False    
@@ -433,7 +435,7 @@ while True:
                     sys.exit()
             if event.type==pygame.KEYDOWN:
                 if event.key==pygame.K_RETURN:
-                    print("enter")
+                    #print("enter")
                     listaBotonesPlay.update()
                     listaBotonesReset.update()
                     listaAuxiliarColisionados.update()
